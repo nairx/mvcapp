@@ -2,15 +2,15 @@ package com.example.mvcapp.controller;
 
 import java.util.List;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.mvcapp.entity.Student;
 import com.example.mvcapp.service.StudentService;
 
-@Controller
-@RequestMapping("/students")
+@RestController
+@RequestMapping("/api/students")
 public class StudentController {
 
     private StudentService studentService;
@@ -19,23 +19,9 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @GetMapping("/view")
-    public String getStudents(Model model) {
-        List<Student> students = studentService.getStudents(null);
-        model.addAttribute("students", students);
-        return "student";
-    }
-
-    @PostMapping("/save")
-    public String createStudent(@ModelAttribute Student student) {
-        studentService.createStudent(student);
-        return "redirect:/students/view";
-    }
-
-    @GetMapping("/delete/{id}")
-    public String deleteStudent(@PathVariable Long id) {
-        studentService.deleteStudent(id);
-        return "redirect:/students/view";
+    @GetMapping
+    public List<Student> getStudents() {
+        return studentService.getStudents(null);
     }
 
 }

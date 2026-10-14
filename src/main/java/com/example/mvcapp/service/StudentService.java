@@ -1,6 +1,7 @@
 package com.example.mvcapp.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -29,6 +30,10 @@ public class StudentService {
     public boolean deleteStudent(Long id) {
         studentRepository.deleteById(id);
         return true;
+    }
+
+    public Student getStudentById(Long id) {
+        return studentRepository.findById(id).orElseThrow(()-> new RuntimeException("User not found"));
     }
 
 }

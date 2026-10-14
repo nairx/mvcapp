@@ -8,21 +8,8 @@
   </head>
   <body>
     <h1>Student Management</h1>
-    <form action="/students/save" method="post">
-      <p>
-        <input type="text" placeholder="Name" name="name" />
-      </p>
-
-      <p>
-        <input type="text" placeholder="Course" name="course" />
-      </p>
-
-      <p>
-        <button>Submit</button>
-      </p>
-    </form>
-    <hr>
-
+   
+    <a href="add">Add Student</a>
     <table>
         <tr>
             <th>Name</th>
@@ -37,7 +24,9 @@
     <td>${student.name}</td>
     <td>${student.course}</td>
     <td>
-        <a href="delete/${student.id}">Delete</a>
+        <a href="delete-confirm/${student.id}">Delete</a>
+
+         <a href="edit/${student.id}">Edit</a>
     </td>
 </tr>
 

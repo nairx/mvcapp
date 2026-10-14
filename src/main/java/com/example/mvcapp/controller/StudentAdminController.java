@@ -19,6 +19,25 @@ public class StudentAdminController {
         this.studentService = studentService;
     }
 
+    @GetMapping("/add")
+    public String getStudents() {
+        return "student-form";
+    }
+
+    @GetMapping("/delete-confirm/{id}")
+    public String confirmDelete(Model model, @PathVariable Long id) {
+        Student student = studentService.getStudentById(id);
+        model.addAttribute("student", student);
+        return "delete-confirm";
+    }
+
+        @GetMapping("/edit/{id}")
+    public String editStudent(Model model, @PathVariable Long id) {
+        Student student = studentService.getStudentById(id);
+        model.addAttribute("student", student);
+        return "student-form";
+    }
+
     @GetMapping("/view")
     public String getStudents(Model model) {
         List<Student> students = studentService.getStudents(null);
@@ -29,13 +48,13 @@ public class StudentAdminController {
     @PostMapping("/save")
     public String createStudent(@ModelAttribute Student student) {
         studentService.createStudent(student);
-        return "redirect:/students/view";
+        return "redirect:/admin/students/view";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteStudent(@PathVariable Long id) {
         studentService.deleteStudent(id);
-        return "redirect:/students/view";
+        return "redirect:/admin/students/view";
     }
 
 }
